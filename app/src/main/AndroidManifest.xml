@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity" android:theme="@style/LoginStyle">
+        <activity android:name=".LoginActivity" android:theme="@style/LoginStyle">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
