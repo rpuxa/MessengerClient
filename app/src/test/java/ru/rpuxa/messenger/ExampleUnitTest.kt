@@ -1,8 +1,8 @@
 package ru.rpuxa.messenger
 
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
-
-import org.junit.Assert.*
+import ru.rpuxa.messenger.model.server.Server
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,6 +12,9 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        runBlocking {
+          val answer =  Server.create("http:// 176.57.217.44").login("12388", "221238")
+            println(answer.error)
+        }
     }
 }
