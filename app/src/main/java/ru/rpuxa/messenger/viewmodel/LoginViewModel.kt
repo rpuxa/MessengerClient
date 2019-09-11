@@ -14,12 +14,12 @@ class LoginViewModel @Inject constructor(
 ) : ViewModel() {
 
     val status get() = _status
+    val error get() = _error
 
     private val _status = MutableLiveData(Status.NO_ERROR)
+    private val _error = MutableLiveData(null as String?)
 
     fun login(login: String, password: String) {
-
-
         viewModelScope.launch(Dispatchers.Main) {
             _status.value = Status.SIGNING
             _status.value = try {
@@ -28,28 +28,46 @@ class LoginViewModel @Inject constructor(
                 if (answer.error == 101) {
                     Status.WRONG_LOGIN_OR_PASSWORD
                 } else {
-                    Status.LOGIN_SUCCSESSFULL
+                    Status.LOGIN_SUCCESSFUL
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
                 Status.SERVER_UNAVAILABLE
             }
         }
+    }
 
+    fun register(name: String, surname: String, login: String, password: String) {
+        viewModelScope.launch(Dispatchers.Main) {
+            _status.value = Status.SIGNING
+            _status.value = try {
+                val answer = server.reg(login, password, name, surname)
+
+                when(answer.error) {
+                    0 -> Status.LOGIN_SUCCESSFUL
+                    100 -> Status.LOGIN_ALREADY_EXISTS
+                    else -> {
+                        _error.value = answer.errorText
+                        Status.WRONG_REG_DATA
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                Status.SERVER_UNAVAILABLE
+            }
+        }
     }
 
     enum class Status {
         SIGNING,
         NO_ERROR,
 
-        WRONG_NAME,
-        WRONG_SURNAME,
-        WRONG_LOGIN,
+        WRONG_REG_DATA,
 
         SERVER_UNAVAILABLE,
-        LOGIN_ALREADY_EXISTS,
         WRONG_LOGIN_OR_PASSWORD,
+        LOGIN_ALREADY_EXISTS,
 
-        LOGIN_SUCCSESSFULL
+        LOGIN_SUCCESSFUL
     }
 }
