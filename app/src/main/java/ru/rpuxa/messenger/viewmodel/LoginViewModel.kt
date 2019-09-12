@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import ru.rpuxa.messenger.MutableLiveData
 import ru.rpuxa.messenger.model.db.CurrentUserDao
 import ru.rpuxa.messenger.model.server.Server
@@ -80,12 +81,20 @@ class LoginViewModel @Inject constructor(
     }
 
     private suspend fun saveToken(token: String) {
-        currentUserDao.get().token = token
+        val user = currentUserDao.get()
+        user.token = token
+        currentUserDao.update(user)
     }
 
     fun resetStatus() {
         _status.value = Status.NO_ERROR
     }
+
+    fun isUserAuthorized(): Boolean =
+        runBlocking {
+            currentUserDao.get().token.isNotBlank()
+        }
+
 
     enum class Status {
         SIGNING,

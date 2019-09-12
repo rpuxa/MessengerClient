@@ -11,4 +11,5 @@
     <string name="unreachable_server">Сервер недоступен</string>
     <string name="account_entering">Входим в аккаунт</string>
     <string name="passwords_not_equals">Пароли не совпадают</string>
+    <string name="registrating">Выполняем регистрацию</string>
 </resources>

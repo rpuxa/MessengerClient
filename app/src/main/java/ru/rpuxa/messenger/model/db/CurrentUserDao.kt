@@ -9,12 +9,12 @@ abstract class CurrentUserDao {
     protected abstract suspend fun getOrNull(): CurrentUser?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun set(user: CurrentUser)
+    abstract suspend fun update(user: CurrentUser)
 
     @Transaction
     open suspend fun get(): CurrentUser {
         return getOrNull() ?: CurrentUser().apply {
-            set(this)
+            update(this)
         }
     }
 }

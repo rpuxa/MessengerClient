@@ -23,7 +23,7 @@ open class LoginFragment : Fragment() {
     protected val loginViewModel: LoginViewModel by viewModel()
     protected val navController by lazyNavController
 
-    protected val loadingText get() = R.string.account_entering
+    protected open val loadingText get() = R.string.account_entering
 
     override fun onCreateView(
         inflater: LayoutInflater,

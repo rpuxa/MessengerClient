@@ -3,8 +3,11 @@ package ru.rpuxa.messenger.view.fragments
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_login.*
+import ru.rpuxa.messenger.R
 
 class RegFragment : LoginFragment() {
+
+    override val loadingText: Int get() = R.string.registrating
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observerStatus()
