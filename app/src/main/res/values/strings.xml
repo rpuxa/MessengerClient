@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Messenger</string>
+    <string name="sign_in">Вход</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="name">Имя</string>
+    <string name="repeat_pass">Повтор пароля</string>
+    <string name="login">Логин</string>
+    <string name="surname">Фамилия</string>
+    <string name="pass">Пароль</string>
+    <string name="wrong_login_or_password">Неверный логин или пароль!</string>
+    <string name="unreachable_server">Сервер недоступен</string>
+    <string name="account_entering">Входим в аккаунт</string>
+    <string name="passwords_not_equals">Пароли не совпадают</string>
 </resources>

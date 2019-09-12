@@ -6,5 +6,5 @@ open class Answer {
     var error: Int = 0
 
     @SerializedName("error_text")
-    lateinit var errorText: String
+    var errorText: String? = null
 }
