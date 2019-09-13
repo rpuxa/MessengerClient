@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import ru.rpuxa.messenger.MutableLiveData
+import ru.rpuxa.messenger.model.db.CurrentUser
 import ru.rpuxa.messenger.model.db.CurrentUserDao
 import ru.rpuxa.messenger.model.server.Server
 import java.io.IOException
@@ -29,16 +30,13 @@ class LoginViewModel @Inject constructor(
             _status.value = try {
                 val answer = server.login(login, password)
 
-                when {
-                    answer.error == 101 -> Status.WRONG_LOGIN_OR_PASSWORD
-                    answer.errorText != null -> {
-                        _error.value = answer.errorText
-                        Status.WRONG_REG_DATA
-                    }
-                    else -> {
-                        saveToken(answer.token)
-                        Status.LOGIN_SUCCESSFUL
-                    }
+                if (answer.errorText != null) {
+                    _error.value = answer.errorText
+                    Status.WRONG_REG_DATA
+                }
+                else {
+                    saveToken(answer.token)
+                    Status.LOGIN_SUCCESSFUL
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -62,16 +60,13 @@ class LoginViewModel @Inject constructor(
             _status.value = Status.SIGNING
             _status.value = try {
                 val answer = server.reg(login, password, name, surname)
-                when {
-                    answer.error == 100 -> Status.LOGIN_ALREADY_EXISTS
-                    answer.errorText != null -> {
-                        _error.value = answer.errorText
-                        Status.WRONG_REG_DATA
-                    }
-                    else -> {
-                        saveToken(answer.token)
-                        Status.LOGIN_SUCCESSFUL
-                    }
+                if (answer.errorText != null) {
+                    _error.value = answer.errorText
+                    Status.WRONG_REG_DATA
+                }
+                else {
+                    saveToken(answer.token)
+                    Status.LOGIN_SUCCESSFUL
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -92,7 +87,7 @@ class LoginViewModel @Inject constructor(
 
     fun isUserAuthorized(): Boolean =
         runBlocking {
-            currentUserDao.get().token.isNotBlank()
+            currentUserDao.get().token != CurrentUser.TOKEN_NOT_INITIALIZED
         }
 
 

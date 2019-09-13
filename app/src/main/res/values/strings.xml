@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Messenger</string>
+    <string name="app_name">VEX</string>
     <string name="sign_in">Вход</string>
     <string name="sign_up">Зарегистрироваться</string>
     <string name="name">Имя</string>
@@ -11,5 +11,9 @@
     <string name="unreachable_server">Сервер недоступен</string>
     <string name="account_entering">Входим в аккаунт</string>
     <string name="passwords_not_equals">Пароли не совпадают</string>
-    <string name="registrating">Выполняем регистрацию</string>
+    <string name="registering">Выполняем регистрацию</string>
+    <string name="birthday">Дата рождения</string>
+    <string name="edit">Редактировать</string>
+    <string name="logout">Выйти из профиля</string>
+    <string name="token_deprecated">Токен устарел</string>
 </resources>

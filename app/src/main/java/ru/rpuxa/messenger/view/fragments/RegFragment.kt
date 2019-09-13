@@ -7,7 +7,7 @@ import ru.rpuxa.messenger.R
 
 class RegFragment : LoginFragment() {
 
-    override val loadingText: Int get() = R.string.registrating
+    override val loadingText: Int get() = R.string.registering
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observerStatus()

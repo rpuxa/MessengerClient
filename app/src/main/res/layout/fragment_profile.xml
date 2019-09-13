@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical">
+
+    <ViewSwitcher
+        android:id="@+id/profile_switcher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/light_gray"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@color/white">
+
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="0dp"
+                    android:layout_height="130dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:srcCompat="@color/colorPrimary" />
+
+                <ImageView
+                    android:id="@+id/profile_icon"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@mipmap/ic_launcher_round" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/name"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/profile_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="Длинное имя"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/surname"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/profile_surname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="Длииииинная фамииля"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:background="@color/light_gray" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView471"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/login"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/profile_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="Длинный ниииииииииииик"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profile_birthday_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView71"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/birthday"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/profile_birthday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="01.01.1970"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/profile_edit"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/edit"
+                        android:textColor="@color/colorAccent" />
+
+                    <Button
+                        android:id="@+id/profile_logout"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/logout"
+                        android:textColor="@android:color/holo_red_dark" />
+
+                    <View
+                        android:id="@+id/view3"
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:background="@color/light_gray" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+        <fragment
+            android:id="@+id/profile_loading"
+            android:name="ru.rpuxa.messenger.view.fragments.LoadingFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </ViewSwitcher>
+
+</ScrollView>

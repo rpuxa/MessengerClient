@@ -19,4 +19,7 @@ class DataBaseProvider {
 
     @Provides
     fun currentUser(db: MyDataBase) = db.currentUserDao
+
+    @Provides
+    fun usersDao(db: MyDataBase) = db.usersDao
 }

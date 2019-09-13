@@ -4,6 +4,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ViewSwitcher
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.annotation.LayoutRes
@@ -25,6 +26,8 @@ val random = Random()
 fun <T> MutableLiveData(value: T) = MutableLiveData<T>().apply {
     setValue(value)
 }
+
+inline fun <T> MutableLiveData() = MutableLiveData<T>()
 
 @Suppress("UNCHECKED_CAST")
 fun <T> nullLiveData() = NullLiveData
@@ -78,3 +81,14 @@ fun ViewGroup.inflate(@LayoutRes res: Int): View {
 inline fun <reified VM : ViewModel> ComponentActivity.viewModel() = viewModels<VM>(::ViewModelFactory)
 inline fun <reified VM : ViewModel> Fragment.viewModel() = activityViewModels<VM>(::ViewModelFactory)
 
+fun ViewSwitcher.showFirst() {
+    if (getChildAt(0) != currentView) {
+        showNext()
+    }
+}
+
+fun ViewSwitcher.showSecond() {
+    if (getChildAt(0) == currentView) {
+        showNext()
+    }
+}

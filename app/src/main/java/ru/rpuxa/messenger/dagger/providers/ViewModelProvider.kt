@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import ru.rpuxa.messenger.dagger.ViewModelKey
 import ru.rpuxa.messenger.viewmodel.LoginViewModel
+import ru.rpuxa.messenger.viewmodel.ProfileViewModel
 
 @Module
 abstract class ViewModelProvider {
@@ -13,5 +14,10 @@ abstract class ViewModelProvider {
     @Binds
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
-    abstract fun player(v: LoginViewModel): ViewModel
+    abstract fun login(v: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    abstract fun profile(v: ProfileViewModel): ViewModel
 }

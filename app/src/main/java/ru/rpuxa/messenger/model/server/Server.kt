@@ -4,6 +4,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import ru.rpuxa.messenger.model.server.answers.PrivateInfoAnswer
+import ru.rpuxa.messenger.model.server.answers.PublicInfoAnswer
 import ru.rpuxa.messenger.model.server.answers.TokenAnswer
 
 interface Server {
@@ -22,6 +24,16 @@ interface Server {
         @Query("login") login: String,
         @Query("pass") password: String
     ): TokenAnswer
+
+    @GET("/profile/getPrivateInfo")
+    suspend fun getPrivateInfo(
+        @Query("token") token: String
+    ): PrivateInfoAnswer
+
+    @GET("/profile/getPublicInfo")
+    suspend fun getPublicInfo(
+        @Query("token") id: Int
+    ): PublicInfoAnswer
 
     companion object {
 
