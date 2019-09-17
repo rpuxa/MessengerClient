@@ -1,4 +1,4 @@
-package ru.rpuxa.messenger.view
+package ru.rpuxa.messenger.view.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

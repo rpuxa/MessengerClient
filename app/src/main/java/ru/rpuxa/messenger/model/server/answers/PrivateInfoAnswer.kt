@@ -5,5 +5,5 @@ open class PrivateInfoAnswer(
     login: String,
     name: String,
     surname: String,
-    birthday: Long?
+    birthday: String?
 ) : PublicInfoAnswer(login, name, surname, birthday)

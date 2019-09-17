@@ -16,4 +16,11 @@
     <string name="edit">Редактировать</string>
     <string name="logout">Выйти из профиля</string>
     <string name="token_deprecated">Токен устарел</string>
+    <string name="cancel">Отмена</string>
+    <string name="accept_changes">Принять изменения</string>
+    <string name="accepting_changes">Принимаем изменения</string>
+    <string name="current_pass">Текущий пароль</string>
+    <string name="new_pass">Новый пароль</string>
+    <string name="repeat_new_pass">Повтор нового пароля</string>
+    <string name="wrong_password">Неверный пароль</string>
 </resources>

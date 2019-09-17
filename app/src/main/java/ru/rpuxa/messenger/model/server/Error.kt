@@ -5,6 +5,9 @@ enum class Error(val code: Int) {
     WRONG_ARGS(1),
     UNKNOWN_TOKEN(2),
     UNKNOWN_ID(3),
+
     UNKNOWN_USER_FIELD(200),
+    CURRENT_PASSWORD_NEEDED(201),
+    CURRENT_PASSWORD_WRONG(202),
     ;
 }

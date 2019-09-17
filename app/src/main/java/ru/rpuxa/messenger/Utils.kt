@@ -10,7 +10,6 @@ import androidx.activity.viewModels
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -55,9 +54,6 @@ inline fun <T> MutableLiveData<T>.update(block: T.() -> Unit = {}) {
     v!!.block()
     value = v
 }
-
-inline fun <T> LiveData<T>.observe(owner: LifecycleOwner, crossinline block: (T) -> Unit) =
-    observe(owner, androidx.lifecycle.Observer { block(it) })
 
 inline val Fragment.lazyNavController get() = lazy { findNavController() }
 

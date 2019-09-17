@@ -6,13 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager.findFragment
+import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.startActivity
-import ru.rpuxa.messenger.*
+import ru.rpuxa.messenger.R
 import ru.rpuxa.messenger.model.LazyUser
-import ru.rpuxa.messenger.view.LoginActivity
+import ru.rpuxa.messenger.showFirst
+import ru.rpuxa.messenger.showSecond
+import ru.rpuxa.messenger.view.activities.LoginActivity
+import ru.rpuxa.messenger.view.activities.ProfileEditorActivity
+import ru.rpuxa.messenger.viewModel
 import ru.rpuxa.messenger.viewmodel.ProfileViewModel
 
 class ProfileFragment : Fragment() {
@@ -70,13 +74,16 @@ class ProfileFragment : Fragment() {
             profile_name.text = it.name
             profile_surname.text = it.surname
             profile_login.text = it.login
-            val birthday = it.birthdayString
-            profile_birthday_container.isVisible = if (birthday == null) {
+            profile_birthday_container.isVisible = if (it.birthday == null) {
                 false
             } else {
-                profile_birthday.text = birthday
+                profile_birthday.text = it.birthday
                 true
             }
+        }
+
+        profile_edit.setOnClickListener {
+            startActivity<ProfileEditorActivity>()
         }
 
         profile_logout.setOnClickListener {

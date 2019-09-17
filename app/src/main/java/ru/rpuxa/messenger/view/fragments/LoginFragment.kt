@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.jetbrains.anko.support.v4.startActivity
 import ru.rpuxa.messenger.R
 import ru.rpuxa.messenger.lazyNavController
-import ru.rpuxa.messenger.observe
-import ru.rpuxa.messenger.view.MainActivity
+import ru.rpuxa.messenger.view.activities.MainActivity
 import ru.rpuxa.messenger.view.dialogs.LoadingDialog
 import ru.rpuxa.messenger.viewModel
 import ru.rpuxa.messenger.viewmodel.LoginViewModel

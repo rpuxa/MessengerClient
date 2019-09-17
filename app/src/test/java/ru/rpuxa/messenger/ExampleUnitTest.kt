@@ -13,8 +13,8 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         runBlocking {
-          val answer =  Server.create("http:// 176.57.217.44").login("12388", "221238")
-            println(answer.error)
+          val answer =  Server.create("http://localhost").setInfoTest("OBDHMvKIrXXTcLHhMHwIVPemAigTXEcA", mapOf("surname" to "hello"))
+            println(answer.string())
         }
     }
 }
