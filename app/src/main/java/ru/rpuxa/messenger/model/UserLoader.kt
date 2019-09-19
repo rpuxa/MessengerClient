@@ -35,7 +35,7 @@ class UserLoader(private val id: Int) {
 
             try {
                 val answer = server.getPublicInfo(id)
-                val loadedUser = User(id, answer.login, answer.name, answer.surname, answer.birthday)
+                val loadedUser = User(id, answer.login, answer.name, answer.surname, answer.birthday, answer.avatar)
                 usersDao.insert(loadedUser)
                 user.value = loadedUser
                 status.value = LazyUser.Status.LOADED

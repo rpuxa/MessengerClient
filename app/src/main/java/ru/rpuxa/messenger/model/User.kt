@@ -10,6 +10,7 @@ class User(
     var login: String,
     var name: String,
     var surname: String,
-    var birthday: String?
+    var birthday: String?,
+    var avatar: String?
 )
 

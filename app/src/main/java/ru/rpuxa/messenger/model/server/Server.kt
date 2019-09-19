@@ -1,12 +1,13 @@
 package ru.rpuxa.messenger.model.server
 
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-import ru.rpuxa.messenger.model.server.answers.PrivateInfoAnswer
-import ru.rpuxa.messenger.model.server.answers.PublicInfoAnswer
-import ru.rpuxa.messenger.model.server.answers.SetInfoAnswer
-import ru.rpuxa.messenger.model.server.answers.TokenAnswer
+import ru.rpuxa.messenger.model.server.answers.*
+import java.io.File
 
 interface Server {
 
@@ -38,13 +39,25 @@ interface Server {
     ): PublicInfoAnswer
 
 
-    @FormUrlEncoded
-    @POST("/profile/setInfo")
+    @GET("/profile/setInfo")
     suspend fun setInfo(
         @Query("token") token: String,
-        @FieldMap(encoded = true) fields: Map<String, String>
+        @QueryMap fields: Map<String, String>
     ): SetInfoAnswer
 
+
+    @Multipart
+    @POST("/profile/setAvatar")
+    suspend fun setAvatar(
+        @Query("token") token: String,
+        @Part icon: MultipartBody.Part
+    ): UrlAnswer
+
+    suspend fun setAvatar(token: String, icon: File): UrlAnswer {
+        val fileReqBody = RequestBody.create(MediaType.parse("image/*"), icon)
+        val part = MultipartBody.Part.createFormData("upload", icon.name, fileReqBody)
+        return setAvatar(token, part)
+    }
 
     companion object {
 

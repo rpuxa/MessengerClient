@@ -54,7 +54,7 @@ class ProfileLoader(private val token: String) {
                     return@launch
                 }
                 val loadedUser =
-                    User(answer.id, answer.login, answer.name, answer.surname, answer.birthday)
+                    User(answer.id, answer.login, answer.name, answer.surname, answer.birthday, answer.avatar)
                 currentUser.id = answer.id
                 usersDao.insert(loadedUser)
                 currentUserDao.update(currentUser)

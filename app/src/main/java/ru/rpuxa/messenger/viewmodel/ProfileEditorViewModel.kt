@@ -14,14 +14,15 @@ import ru.rpuxa.messenger.model.db.UsersDao
 import ru.rpuxa.messenger.model.server.EditorFields
 import ru.rpuxa.messenger.model.server.Error
 import ru.rpuxa.messenger.model.server.Server
+import java.io.File
 import java.io.IOException
 import javax.inject.Inject
 
 class ProfileEditorViewModel @Inject constructor(
-    private val currentUserDao: CurrentUserDao,
-    private val usersDao: UsersDao,
-    private val server: Server,
-    private val context: Context
+        private val currentUserDao: CurrentUserDao,
+        private val usersDao: UsersDao,
+        private val server: Server,
+        private val context: Context
 ) : ViewModel() {
 
     private val currentUser = runBlocking { currentUserDao.get() }
@@ -76,17 +77,17 @@ class ProfileEditorViewModel @Inject constructor(
 
     private fun changedFields(personal: Boolean): Map<String, String> {
         val newMap = HashMap<String, String>()
-        for ((field, value) in fieldsMap) {
+        loop@ for ((field, value) in fieldsMap) {
 
             val profileField: Any? = if (personal) {
                 when (field) {
                     EditorFields.NAME -> profile.name
                     EditorFields.SURNAME -> profile.surname
                     EditorFields.BIRTHDAY -> profile.birthday
-                    else -> null
-                } ?: continue
+                    else -> continue@loop
+                }
             } else {
-                if (field == EditorFields.LOGIN) profile.login else null
+                if (field == EditorFields.LOGIN) profile.login else continue
             }
 
             if (profileField != value)
@@ -97,7 +98,7 @@ class ProfileEditorViewModel @Inject constructor(
     }
 
     private fun acceptFields(fields: Map<String, String>) {
-        _status.value = Status.LOADING
+        _status.value = Status.CHANGING_DATA
         viewModelScope.launch {
             try {
                 val answer = server.setInfo(currentUser.token, fields)
@@ -107,14 +108,18 @@ class ProfileEditorViewModel @Inject constructor(
 
                 if (answer.error == Error.CURRENT_PASSWORD_WRONG.code) {
                     _currentPasswordError.value = true
+                    _status.value = Status.DONE
                     return@launch
                 }
 
+
+
                 _currentPasswordError.value = false
 
-
-                fields.entries.forEachIndexed { index, (field, value) ->
-                    val errorCode = answer.errors[index]
+                var index = 0
+                fields.entries.forEach { (field, value) ->
+                    if (field == CURRENT_PASSWORD) return@forEach
+                    val errorCode = answer.errors[index++]
                     val isNoError = errorCode == Error.NO_ERROR.code
                     val errorText = if (isNoError) null else answer.errorTexts[errorCode]
                     when (field) {
@@ -158,9 +163,9 @@ class ProfileEditorViewModel @Inject constructor(
     }
 
     fun acceptEnterChanges(
-        currentPassword: String,
-        newPassword: String,
-        newRepeatPassword: String
+            currentPassword: String,
+            newPassword: String,
+            newRepeatPassword: String
     ) {
         if (newPassword != newRepeatPassword) {
             _newRepeatPasswordError.value = context.getString(R.string.passwords_not_equals)
@@ -191,8 +196,24 @@ class ProfileEditorViewModel @Inject constructor(
         fieldsMap[EditorFields.LOGIN] = login
     }
 
+    fun updateAvatar(avatar: File) {
+        _status.value = Status.UPLOADING_ICON
+        viewModelScope.launch {
+            try {
+                val answer = server.setAvatar(currentUser.token, avatar)
+                val url = answer.url
+                profile.avatar = url
+                usersDao.insert(profile)
+                _status.value = Status.DONE
+            } catch (e: IOException) {
+                _status.value = Status.SERVER_ERROR
+            }
+        }
+    }
+
     enum class Status {
-        LOADING,
+        CHANGING_DATA,
+        UPLOADING_ICON,
         SERVER_ERROR,
         DONE
     }

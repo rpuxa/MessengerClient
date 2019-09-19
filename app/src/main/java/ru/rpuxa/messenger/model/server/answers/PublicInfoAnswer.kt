@@ -4,5 +4,6 @@ open class PublicInfoAnswer(
     val login: String,
     val name: String,
     val surname: String,
-    val birthday: String?
+    val birthday: String?,
+    val avatar: String?
 ) : Answer()

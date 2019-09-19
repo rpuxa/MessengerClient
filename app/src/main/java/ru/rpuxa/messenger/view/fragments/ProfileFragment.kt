@@ -25,12 +25,16 @@ class ProfileFragment : Fragment() {
 
     private val profileLoading by lazy { childFragmentManager.findFragmentById(R.id.profile_loading) as LoadingFragment }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_profile, container, false).apply {
+    override fun onResume() {
+        super.onResume()
+        profileViewModel.retry()
     }
+
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View = inflater.inflate(R.layout.fragment_profile, container, false)
 
     private fun showProfile() {
         profile_switcher.showFirst()
