@@ -15,6 +15,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
+import com.bumptech.glide.RequestManager
+import com.bumptech.glide.request.RequestOptions
 import ru.rpuxa.messenger.viewmodel.ViewModelFactory
 import java.util.*
 
@@ -74,8 +76,11 @@ fun ViewGroup.inflate(@LayoutRes res: Int): View {
     return inflater.inflate(res, this, false)
 }
 
-inline fun <reified VM : ViewModel> ComponentActivity.viewModel() = viewModels<VM>(::ViewModelFactory)
-inline fun <reified VM : ViewModel> Fragment.viewModel() = activityViewModels<VM>(::ViewModelFactory)
+inline fun <reified VM : ViewModel> ComponentActivity.viewModel() =
+    viewModels<VM>(::ViewModelFactory)
+
+inline fun <reified VM : ViewModel> Fragment.viewModel() =
+    activityViewModels<VM>(::ViewModelFactory)
 
 fun ViewSwitcher.showFirst() {
     if (getChildAt(0) != currentView) {
@@ -88,3 +93,8 @@ fun ViewSwitcher.showSecond() {
         showNext()
     }
 }
+
+fun RequestManager.setDefaultRequestOptions() =
+    setDefaultRequestOptions(RequestOptions().apply {
+        placeholder(R.drawable.no_avatar)
+    })

@@ -3,24 +3,25 @@ package ru.rpuxa.messenger.view.activities
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.observe
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_profile_editor.*
 import org.jetbrains.anko.longToast
+import ru.rpuxa.messenger.R
+import ru.rpuxa.messenger.setDefaultRequestOptions
 import ru.rpuxa.messenger.view.dialogs.LoadingDialog
 import ru.rpuxa.messenger.viewModel
 import ru.rpuxa.messenger.viewmodel.ProfileEditorViewModel
-import java.text.SimpleDateFormat
-import java.util.*
-import android.provider.MediaStore
-import android.database.Cursor
-import android.net.Uri
-import ru.rpuxa.messenger.R
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ProfileEditorActivity : AppCompatActivity() {
@@ -32,6 +33,7 @@ class ProfileEditorActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile_editor)
 
         setSupportActionBar(profile_editor_toolbar)
+
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
@@ -57,6 +59,12 @@ class ProfileEditorActivity : AppCompatActivity() {
         profile_editor_login.addTextChangedListener {
             viewModel.loginChanged(it!!.toString())
         }
+
+        Glide.with(this)
+            .setDefaultRequestOptions()
+            .load(viewModel.profile.avatar)
+            .apply(RequestOptions.circleCropTransform())
+            .into(profile_editor_icon)
 
         viewModel.nameError.observe(this, profile_editor_name_layout::setError)
         viewModel.surnameError.observe(this, profile_editor_surname_layout::setError)
@@ -86,10 +94,28 @@ class ProfileEditorActivity : AppCompatActivity() {
                     viewModel.resetStatus()
                 }
 
+                ProfileEditorViewModel.Status.ICON_UPLOADED -> {
+                    Glide.with(this)
+                        .setDefaultRequestOptions()
+                        .load(viewModel.avatarFile)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(profile_editor_icon)
+
+                    longToast(R.string.icon_uploaded)
+                    viewModel.resetStatus()
+                }
+
                 ProfileEditorViewModel.Status.CHANGING_DATA -> {
                     dialog = LoadingDialog.show(
                         supportFragmentManager,
                         getString(R.string.accepting_changes)
+                    )
+                }
+
+                ProfileEditorViewModel.Status.UPLOADING_ICON -> {
+                    dialog = LoadingDialog.show(
+                        supportFragmentManager,
+                        getString(R.string.uploading_icon)
                     )
                 }
             }
@@ -170,22 +196,8 @@ class ProfileEditorActivity : AppCompatActivity() {
                          output.flush()
                      }
                  }
-
                  viewModel.updateAvatar(file)
             }
-        }
-    }
-
-    fun getRealPathFromURI(contentUri: Uri): String {
-        var cursor: Cursor? = null
-        try {
-            val proj = arrayOf(MediaStore.Images.Media.DATA)
-            cursor = contentResolver.query(contentUri, proj, null, null, null)
-            val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-            cursor.moveToFirst()
-            return cursor.getString(columnIndex)
-        } finally {
-            cursor?.close()
         }
     }
 

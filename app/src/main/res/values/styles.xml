@@ -17,6 +17,14 @@
 
     </style>
 
+    <style name="ProfileTheme" parent="MyTheme">
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="MyTheme">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
     <style name="BaseButtonStyle" parent="MyTheme">
         <item name="android:paddingStart">5dp</item>
         <item name="android:paddingEnd">5dp</item>

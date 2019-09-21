@@ -7,16 +7,15 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.startActivity
-import ru.rpuxa.messenger.R
+import ru.rpuxa.messenger.*
 import ru.rpuxa.messenger.model.LazyUser
-import ru.rpuxa.messenger.showFirst
-import ru.rpuxa.messenger.showSecond
 import ru.rpuxa.messenger.view.activities.LoginActivity
 import ru.rpuxa.messenger.view.activities.ProfileEditorActivity
-import ru.rpuxa.messenger.viewModel
 import ru.rpuxa.messenger.viewmodel.ProfileViewModel
 
 class ProfileFragment : Fragment() {
@@ -31,9 +30,9 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_profile, container, false)
 
     private fun showProfile() {
@@ -51,6 +50,8 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
         profileViewModel.lazyProfile.status.observe(this) {
             when (it) {
                 LazyUser.Status.LOADING -> {
@@ -75,6 +76,13 @@ class ProfileFragment : Fragment() {
         }
 
         profileViewModel.lazyProfile.user.observe(this) {
+            Glide.with(this)
+                .setDefaultRequestOptions()
+                .load(it.avatar)
+                .apply(RequestOptions.circleCropTransform())
+                .into(profile_icon)
+
+
             profile_name.text = it.name
             profile_surname.text = it.surname
             profile_login.text = it.login

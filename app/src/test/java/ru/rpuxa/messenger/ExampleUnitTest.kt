@@ -22,9 +22,10 @@ class ExampleUnitTest {
         val image = File("image.png")
         assertEquals(image.exists(), true)
         runBlocking {
-
-            val answer =
-                Server.create("http://localhost").setIcon("BukidUVNtYPdiirUIydvFjOlPAWtrrjF", part)
+            val fileReqBody = RequestBody.create(MediaType.parse("image/*"), image)
+            val part = MultipartBody.Part.createFormData("upload", "avatar", fileReqBody)
+            val answer = Server.create("http://localhost")
+                .setAvatar("VvFGhFmvqYudKOiXxKEdIpXuNOWGQPhM", part)
             println(answer.url)
             assertEquals(answer.error, 0)
         }

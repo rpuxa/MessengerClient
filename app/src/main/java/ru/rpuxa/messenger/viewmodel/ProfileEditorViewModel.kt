@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import ru.rpuxa.messenger.R
 import ru.rpuxa.messenger.model.db.CurrentUser
 import ru.rpuxa.messenger.model.db.CurrentUserDao
@@ -14,15 +17,16 @@ import ru.rpuxa.messenger.model.db.UsersDao
 import ru.rpuxa.messenger.model.server.EditorFields
 import ru.rpuxa.messenger.model.server.Error
 import ru.rpuxa.messenger.model.server.Server
+import ru.rpuxa.messenger.model.server.answers.UrlAnswer
 import java.io.File
 import java.io.IOException
 import javax.inject.Inject
 
 class ProfileEditorViewModel @Inject constructor(
-        private val currentUserDao: CurrentUserDao,
-        private val usersDao: UsersDao,
-        private val server: Server,
-        private val context: Context
+    private val currentUserDao: CurrentUserDao,
+    private val usersDao: UsersDao,
+    private val server: Server,
+    private val context: Context
 ) : ViewModel() {
 
     private val currentUser = runBlocking { currentUserDao.get() }
@@ -43,6 +47,9 @@ class ProfileEditorViewModel @Inject constructor(
     val birthdayError: LiveData<String?> get() = _birthdayError
     val surnameError: LiveData<String?> get() = _surnameError
     val status: LiveData<Status> get() = _status
+
+    lateinit var avatarFile: File
+        private set
 
 
     private val _showPersonalAcceptButton = MutableLiveData(false)
@@ -163,9 +170,9 @@ class ProfileEditorViewModel @Inject constructor(
     }
 
     fun acceptEnterChanges(
-            currentPassword: String,
-            newPassword: String,
-            newRepeatPassword: String
+        currentPassword: String,
+        newPassword: String,
+        newRepeatPassword: String
     ) {
         if (newPassword != newRepeatPassword) {
             _newRepeatPasswordError.value = context.getString(R.string.passwords_not_equals)
@@ -200,11 +207,14 @@ class ProfileEditorViewModel @Inject constructor(
         _status.value = Status.UPLOADING_ICON
         viewModelScope.launch {
             try {
-                val answer = server.setAvatar(currentUser.token, avatar)
+                val fileReqBody = RequestBody.create(MediaType.parse("image/*"), avatar)
+                val part = MultipartBody.Part.createFormData("upload", "avatar", fileReqBody)
+                val answer = server.setAvatar(currentUser.token, part)
                 val url = answer.url
                 profile.avatar = url
                 usersDao.insert(profile)
-                _status.value = Status.DONE
+                avatarFile = avatar
+                _status.value = Status.ICON_UPLOADED
             } catch (e: IOException) {
                 _status.value = Status.SERVER_ERROR
             }
@@ -214,6 +224,7 @@ class ProfileEditorViewModel @Inject constructor(
     enum class Status {
         CHANGING_DATA,
         UPLOADING_ICON,
+        ICON_UPLOADED,
         SERVER_ERROR,
         DONE
     }

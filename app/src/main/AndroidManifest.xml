@@ -4,7 +4,6 @@
     package="ru.rpuxa.messenger">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".view.App"
         android:allowBackup="true"
@@ -16,8 +15,8 @@
         android:theme="@style/MyTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
-        <activity android:name=".view.activities.ProfileEditorActivity"></activity>
-        <activity android:name=".view.activities.MainActivity" />
+        <activity android:name=".view.activities.ProfileEditorActivity" android:theme="@style/ProfileTheme"/>
+        <activity android:name=".view.activities.MainActivity" android:theme="@style/ProfileTheme"/>
         <activity
             android:name=".view.activities.LoginActivity"
             android:theme="@style/LoginStyle">

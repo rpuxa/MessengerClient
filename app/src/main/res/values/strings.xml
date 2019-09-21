@@ -23,4 +23,6 @@
     <string name="new_pass">Новый пароль</string>
     <string name="repeat_new_pass">Повтор нового пароля</string>
     <string name="wrong_password">Неверный пароль</string>
+    <string name="uploading_icon">Загружаем аватар</string>
+    <string name="icon_uploaded">Аватар загружен!</string>
 </resources>

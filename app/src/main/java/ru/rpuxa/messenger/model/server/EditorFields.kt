@@ -5,5 +5,5 @@ enum class EditorFields(val text: String) {
     PASSWORD("pass"),
     NAME("name"),
     SURNAME("surname"),
-    BIRTHDAY("birthday")
+    BIRTHDAY("birthday"),
 }
