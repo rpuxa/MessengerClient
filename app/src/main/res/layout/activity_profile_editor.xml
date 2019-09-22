@@ -95,7 +95,8 @@
                         android:id="@+id/profile_editor_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/name" />
+                        android:hint="@string/name"
+                        android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -107,7 +108,8 @@
                         android:id="@+id/profile_editor_surname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/surname" />
+                        android:hint="@string/surname"
+                        android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <EditText
@@ -168,7 +170,9 @@
                     android:id="@+id/profile_editor_current_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/current_pass" />
+                    android:hint="@string/current_pass"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -180,7 +184,8 @@
                     android:id="@+id/profile_editor_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/login" />
+                    android:hint="@string/login"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -192,7 +197,9 @@
                     android:id="@+id/profile_editor_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/new_pass" />
+                    android:hint="@string/new_pass"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -204,7 +211,9 @@
                     android:id="@+id/profile_editor_repeat_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/repeat_new_pass" />
+                    android:hint="@string/repeat_new_pass"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <FrameLayout

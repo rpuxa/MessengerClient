@@ -11,7 +11,7 @@
     </style>
 
     <style name="LoginStyle" parent="MyTheme">
-        <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:windowBackground">@drawable/background_image</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="colorPrimaryDark">@android:color/transparent</item>
 

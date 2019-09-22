@@ -3,14 +3,17 @@
 
     <item
         android:id="@+id/navigation_profile"
+        android:icon="@drawable/profile"
         android:title="Профиль"/>
 
     <item
         android:id="@+id/locations_nav"
+        android:icon="@drawable/friends"
         android:title="Друзья"/>
 
     <item
         android:id="@+id/navigation_stuff"
+        android:icon="@drawable/dialogs"
         android:title="Диалоги"/>
 
 </menu>
