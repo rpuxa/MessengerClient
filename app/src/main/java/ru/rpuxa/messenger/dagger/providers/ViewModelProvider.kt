@@ -5,6 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import ru.rpuxa.messenger.dagger.ViewModelKey
+import ru.rpuxa.messenger.viewmodel.FriendsViewModel
 import ru.rpuxa.messenger.viewmodel.LoginViewModel
 import ru.rpuxa.messenger.viewmodel.ProfileEditorViewModel
 import ru.rpuxa.messenger.viewmodel.ProfileViewModel
@@ -26,4 +27,9 @@ abstract class ViewModelProvider {
     @IntoMap
     @ViewModelKey(ProfileEditorViewModel::class)
     abstract fun editor(v: ProfileEditorViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FriendsViewModel::class)
+    abstract fun friends(v: FriendsViewModel): ViewModel
 }

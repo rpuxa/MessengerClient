@@ -25,7 +25,7 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/friend_request_login"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -33,7 +33,7 @@
                     android:ems="10"
                     android:hint="Введите логин"
                     android:inputType="textPersonName"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                    app:layout_constraintEnd_toStartOf="@+id/friend_request_search"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -51,16 +51,16 @@
                     app:titleTextColor="@color/white" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/friend_request_search"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:src="@drawable/colored_search"
-                    app:layout_constraintBottom_toBottomOf="@+id/editText"
+                    app:layout_constraintBottom_toBottomOf="@+id/friend_request_login"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/editText" />
+                    app:layout_constraintTop_toTopOf="@+id/friend_request_login" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/friend_request_msg"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -68,10 +68,11 @@
                     android:layout_marginBottom="8dp"
                     android:text="Сообщение о результате поиска"
                     android:textColor="@android:color/holo_red_dark"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText" />
+                    app:layout_constraintTop_toBottomOf="@+id/friend_request_login" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -114,6 +115,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/friend_requests_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -155,6 +157,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/friends_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"

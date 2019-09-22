@@ -1,12 +1,12 @@
 package ru.rpuxa.messenger.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import ru.rpuxa.messenger.MutableLiveData
 import ru.rpuxa.messenger.model.db.CurrentUser
 import ru.rpuxa.messenger.model.db.CurrentUserDao
 import ru.rpuxa.messenger.model.server.Server

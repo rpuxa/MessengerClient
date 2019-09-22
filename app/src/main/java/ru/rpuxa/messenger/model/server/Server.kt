@@ -1,15 +1,11 @@
 package ru.rpuxa.messenger.model.server
 
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
-import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Query
+import retrofit2.http.QueryMap
 import ru.rpuxa.messenger.model.server.answers.*
-import java.io.File
-import java.util.concurrent.TimeUnit
 
 interface Server {
 
@@ -47,24 +43,16 @@ interface Server {
         @QueryMap fields: Map<String, String>
     ): SetInfoAnswer
 
-
-    @Multipart
-    @POST("/profile/setAvatar")
-    suspend fun setAvatar(
+    @GET("/friends/sendRequest")
+    suspend fun sendFriendRequest(
         @Query("token") token: String,
-        @Part icon: MultipartBody.Part
-    ): UrlAnswer
+        @Query("login") friendLogin: String
+    ): Answer
 
     companion object {
 
         fun create(ip: String): Server =
             Retrofit.Builder()
-                .client(
-                    OkHttpClient.Builder()
-                        .writeTimeout(1, TimeUnit.MINUTES)
-                        .readTimeout(1, TimeUnit.MINUTES)
-                        .build()
-                )
                 .baseUrl(ip)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

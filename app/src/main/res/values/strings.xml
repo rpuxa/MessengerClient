@@ -25,4 +25,10 @@
     <string name="wrong_password">Неверный пароль</string>
     <string name="uploading_icon">Загружаем аватар</string>
     <string name="icon_uploaded">Аватар загружен!</string>
+    <string name="sending_request">Отправляем запрос</string>
+    <string name="request_sent">Заявка в друзья отправлена</string>
+    <string name="account_not_found">Аккаунт не найден</string>
+    <string name="already_sent_request">Вы уже отправлили заявку этому человеку</string>
+    <string name="already_in_friends">Этот человек уже у вас в друзьях</string>
+    <string name="cant_send_request_to_yourself">Нельзя отправить запрос самому себе</string>
 </resources>

@@ -18,17 +18,15 @@ import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import ru.rpuxa.messenger.viewmodel.ViewModelFactory
-import java.util.*
-
-val random = Random()
 
 
+/*
 @Suppress("FunctionName")
 fun <T> MutableLiveData(value: T) = MutableLiveData<T>().apply {
     setValue(value)
 }
 
-inline fun <T> MutableLiveData() = MutableLiveData<T>()
+inline fun <T> MutableLiveData() = MutableLiveData<T>()*/
 
 @Suppress("UNCHECKED_CAST")
 fun <T> nullLiveData() = NullLiveData

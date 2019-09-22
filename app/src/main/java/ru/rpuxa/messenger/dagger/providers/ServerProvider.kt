@@ -3,6 +3,7 @@ package ru.rpuxa.messenger.dagger.providers
 import dagger.Module
 import dagger.Provides
 import ru.rpuxa.messenger.BuildConfig
+import ru.rpuxa.messenger.model.server.LongOperationsServer
 import ru.rpuxa.messenger.model.server.Server
 import javax.inject.Singleton
 
@@ -12,4 +13,8 @@ class ServerProvider {
     @Singleton
     @Provides
     fun server() = Server.create(BuildConfig.SERVER_URL)
+
+    @Singleton
+    @Provides
+    fun longOperationServer() = LongOperationsServer.create(BuildConfig.SERVER_URL)
 }

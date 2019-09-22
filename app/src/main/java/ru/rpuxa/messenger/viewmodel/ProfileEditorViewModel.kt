@@ -16,8 +16,8 @@ import ru.rpuxa.messenger.model.db.CurrentUserDao
 import ru.rpuxa.messenger.model.db.UsersDao
 import ru.rpuxa.messenger.model.server.EditorFields
 import ru.rpuxa.messenger.model.server.Error
+import ru.rpuxa.messenger.model.server.LongOperationsServer
 import ru.rpuxa.messenger.model.server.Server
-import ru.rpuxa.messenger.model.server.answers.UrlAnswer
 import java.io.File
 import java.io.IOException
 import javax.inject.Inject
@@ -26,6 +26,7 @@ class ProfileEditorViewModel @Inject constructor(
     private val currentUserDao: CurrentUserDao,
     private val usersDao: UsersDao,
     private val server: Server,
+    private val longOperationsServer: LongOperationsServer,
     private val context: Context
 ) : ViewModel() {
 
@@ -209,7 +210,7 @@ class ProfileEditorViewModel @Inject constructor(
             try {
                 val fileReqBody = RequestBody.create(MediaType.parse("image/*"), avatar)
                 val part = MultipartBody.Part.createFormData("upload", "avatar", fileReqBody)
-                val answer = server.setAvatar(currentUser.token, part)
+                val answer = longOperationsServer.setAvatar(currentUser.token, part)
                 val url = answer.url
                 profile.avatar = url
                 usersDao.insert(profile)

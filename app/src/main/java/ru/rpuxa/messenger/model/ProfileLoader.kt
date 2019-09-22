@@ -1,9 +1,9 @@
 package ru.rpuxa.messenger.model
 
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.rpuxa.messenger.MutableLiveData
 import ru.rpuxa.messenger.model.db.CurrentUser
 import ru.rpuxa.messenger.model.db.CurrentUserDao
 import ru.rpuxa.messenger.model.db.UsersDao

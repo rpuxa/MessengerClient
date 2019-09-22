@@ -7,4 +7,12 @@
         android:id="@+id/profileFragment"
         android:name="ru.rpuxa.messenger.view.fragments.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/dialogsFragment"
+        android:name="ru.rpuxa.messenger.view.fragments.DialogsFragment"
+        android:label="DialogsFragment" />
+    <fragment
+        android:id="@+id/friendsFragment"
+        android:name="ru.rpuxa.messenger.view.fragments.FriendsFragment"
+        android:label="FriendsFragment" />
 </navigation>
