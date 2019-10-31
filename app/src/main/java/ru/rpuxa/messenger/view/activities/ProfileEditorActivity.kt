@@ -3,18 +3,15 @@ package ru.rpuxa.messenger.view.activities
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.observe
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_profile_editor.*
 import org.jetbrains.anko.longToast
 import ru.rpuxa.messenger.R
-import ru.rpuxa.messenger.setDefaultRequestOptions
+import ru.rpuxa.messenger.loadAvatar
 import ru.rpuxa.messenger.view.dialogs.LoadingDialog
 import ru.rpuxa.messenger.viewModel
 import ru.rpuxa.messenger.viewmodel.ProfileEditorViewModel
@@ -60,11 +57,7 @@ class ProfileEditorActivity : AppCompatActivity() {
             viewModel.loginChanged(it!!.toString())
         }
 
-        Glide.with(this)
-            .setDefaultRequestOptions()
-            .load(viewModel.profile.avatar)
-            .apply(RequestOptions.circleCropTransform())
-            .into(profile_editor_icon)
+        loadAvatar(viewModel.profile.avatar,profile_editor_icon)
 
         viewModel.nameError.observe(this, profile_editor_name_layout::setError)
         viewModel.surnameError.observe(this, profile_editor_surname_layout::setError)
@@ -95,12 +88,6 @@ class ProfileEditorActivity : AppCompatActivity() {
                 }
 
                 ProfileEditorViewModel.Status.ICON_UPLOADED -> {
-                    Glide.with(this)
-                        .setDefaultRequestOptions()
-                        .load(viewModel.avatarFile)
-                        .apply(RequestOptions.circleCropTransform())
-                        .into(profile_editor_icon)
-
                     longToast(R.string.icon_uploaded)
                     viewModel.resetStatus()
                 }

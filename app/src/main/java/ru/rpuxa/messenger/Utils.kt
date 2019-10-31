@@ -1,9 +1,11 @@
 package ru.rpuxa.messenger
 
+import android.content.Context
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ViewSwitcher
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
@@ -15,7 +17,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
-import com.bumptech.glide.RequestManager
+import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import ru.rpuxa.messenger.viewmodel.ViewModelFactory
 
@@ -92,7 +94,13 @@ fun ViewSwitcher.showSecond() {
     }
 }
 
-fun RequestManager.setDefaultRequestOptions() =
-    setDefaultRequestOptions(RequestOptions().apply {
-        placeholder(R.drawable.no_avatar)
-    })
+
+fun Context.loadAvatar(avatar: String?, image: ImageView) {
+    Glide.with(this)
+        .setDefaultRequestOptions(RequestOptions().apply {
+            placeholder(R.drawable.no_avatar)
+        })
+        .load(avatar)
+        .apply(RequestOptions.circleCropTransform())
+        .into(image)
+}

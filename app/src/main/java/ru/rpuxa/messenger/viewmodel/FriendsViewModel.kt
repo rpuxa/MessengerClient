@@ -19,11 +19,36 @@ class FriendsViewModel @Inject constructor(
 
     val currentUser = runBlocking { currentUserDao.get() }
     val requestStatus: LiveData<RequestStatus> get() = _requestStatus
+    val friendRequests: LiveData<List<Int>> get() = _friendRequests
+    val answerStatus: LiveData<AnswerStatus> get() = _answerStatus
+    val friends: LiveData<List<Int>> get() = _friends
 
     private val _requestStatus = MutableLiveData(RequestStatus.NONE)
+    private val _friendRequests = MutableLiveData(emptyList<Int>())
+    private val _answerStatus = MutableLiveData(AnswerStatus.NONE)
+    private val _friends = MutableLiveData(emptyList<Int>())
+
+
+    fun loadFriendsRequest() {
+        viewModelScope.launch {
+            val token = currentUser.token
+            try {
+                _friendRequests.value = server.getFriendsRequests(token).ids
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
 
     fun loadAllFriends() {
-
+        viewModelScope.launch {
+            val token = currentUser.token
+            try {
+                _friends.value = server.getFriends(token).ids
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
     }
 
     fun sendFriendRequest(login: String) {
@@ -48,6 +73,24 @@ class FriendsViewModel @Inject constructor(
         }
     }
 
+    fun answerOnRequest(id: Int, accept: Boolean) {
+        viewModelScope.launch {
+            _answerStatus.value = AnswerStatus.LOADING
+            try {
+                val token = currentUser.token
+                server.requestAnswer(token, id, if (accept) 1 else 0)
+                _answerStatus.value = AnswerStatus.NONE
+            } catch (e: IOException) {
+                e.printStackTrace()
+                _answerStatus.value = AnswerStatus.SERVER_ERROR
+            }
+        }
+    }
+
+    fun resetAnswerStatus() {
+        _answerStatus.value = AnswerStatus.NONE
+    }
+
     enum class RequestStatus {
         NONE,
         SENDING,
@@ -56,6 +99,12 @@ class FriendsViewModel @Inject constructor(
         ALREADY_IN_FRIENDS,
         ALREADY_SENT_REQUEST,
         CANT_SEND_REQUEST_TO_YOURSELF,
+        SERVER_ERROR,
+    }
+
+    enum class AnswerStatus {
+        NONE,
+        LOADING,
         SERVER_ERROR,
     }
 }

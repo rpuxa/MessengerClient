@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.startActivity
@@ -76,11 +74,7 @@ class ProfileFragment : Fragment() {
         }
 
         profileViewModel.lazyProfile.user.observe(this) {
-            Glide.with(this)
-                .setDefaultRequestOptions()
-                .load(it.avatar)
-                .apply(RequestOptions.circleCropTransform())
-                .into(profile_icon)
+            requireContext().loadAvatar(it.avatar, profile_icon)
 
 
             profile_name.text = it.name
@@ -103,6 +97,7 @@ class ProfileFragment : Fragment() {
             startActivity<LoginActivity>()
         }
     }
+
 
 
 }

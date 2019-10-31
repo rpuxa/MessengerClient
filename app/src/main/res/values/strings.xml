@@ -31,4 +31,5 @@
     <string name="already_sent_request">Вы уже отправлили заявку этому человеку</string>
     <string name="already_in_friends">Этот человек уже у вас в друзьях</string>
     <string name="cant_send_request_to_yourself">Нельзя отправить запрос самому себе</string>
+    <string name="loading">Загрузка</string>
 </resources>

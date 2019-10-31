@@ -49,6 +49,23 @@ interface Server {
         @Query("login") friendLogin: String
     ): Answer
 
+    @GET("/friends/getRequests")
+    suspend fun getFriendsRequests(
+        @Query("token") token: String
+    ): IdsAnswer
+
+    @GET("/friends/getAll")
+    suspend fun getFriends(
+        @Query("token") token: String
+    ): IdsAnswer
+
+    @GET("/friends/answer")
+    suspend fun requestAnswer(
+        @Query("token") token: String,
+        @Query("id") id: Int,
+        @Query("accept") accept: Int
+    ): Answer
+
     companion object {
 
         fun create(ip: String): Server =
