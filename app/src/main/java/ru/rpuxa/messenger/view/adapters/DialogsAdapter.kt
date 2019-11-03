@@ -16,6 +16,7 @@ import ru.rpuxa.messenger.getEqualsDiff
 import ru.rpuxa.messenger.inflate
 import ru.rpuxa.messenger.loadAvatar
 import ru.rpuxa.messenger.model.UserLoader
+import ru.rpuxa.messenger.view.activities.ChatActivity
 
 class DialogsAdapter(private val fragment: Fragment) :
     ListAdapter<Int, DialogsAdapter.ViewModel>(getEqualsDiff()) {
@@ -31,6 +32,10 @@ class DialogsAdapter(private val fragment: Fragment) :
             UserLoader(item).load(fragment.lifecycleScope).user.observe(fragment) {
                 name.text = "${it.name} ${it.surname}"
                 itemView.context.loadAvatar(it.avatar, avatar)
+            }
+
+            itemView.setOnClickListener {
+                ChatActivity.start(it.context, item)
             }
         }
     }

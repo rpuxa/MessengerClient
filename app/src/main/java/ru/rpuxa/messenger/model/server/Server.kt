@@ -66,6 +66,19 @@ interface Server {
         @Query("accept") accept: Int
     ): Answer
 
+    @GET("/dialogs/getMessages")
+    suspend fun getMessages(
+        @Query("token") token: String,
+        @Query("id") dialogId: Int,
+        @Query("messageId") offset: Int,
+        @Query("limit") limit: Int
+    ): List<MessageAnswer>
+
+    @GET("/getLastActionId")
+    suspend fun getLastActionId(
+        @Query("token") token: String
+    ): LastActionIdAnswer
+
     companion object {
 
         fun create(ip: String): Server =

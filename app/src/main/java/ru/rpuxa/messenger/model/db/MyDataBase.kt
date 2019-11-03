@@ -7,7 +7,8 @@ import ru.rpuxa.messenger.model.User
 @Database(
     entities = [
         CurrentUser::class,
-        User::class
+        User::class,
+    MessageEntity::class
     ],
     version = 1
 )
@@ -16,4 +17,6 @@ abstract class MyDataBase : RoomDatabase() {
     abstract val currentUserDao: CurrentUserDao
 
     abstract val usersDao: UsersDao
+
+    abstract val messagesDao: MessagesDao
 }

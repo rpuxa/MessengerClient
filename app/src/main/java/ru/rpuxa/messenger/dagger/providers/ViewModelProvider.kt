@@ -5,10 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import ru.rpuxa.messenger.dagger.ViewModelKey
-import ru.rpuxa.messenger.viewmodel.FriendsViewModel
-import ru.rpuxa.messenger.viewmodel.LoginViewModel
-import ru.rpuxa.messenger.viewmodel.ProfileEditorViewModel
-import ru.rpuxa.messenger.viewmodel.ProfileViewModel
+import ru.rpuxa.messenger.viewmodel.*
 
 @Module
 abstract class ViewModelProvider {
@@ -32,4 +29,14 @@ abstract class ViewModelProvider {
     @IntoMap
     @ViewModelKey(FriendsViewModel::class)
     abstract fun friends(v: FriendsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChatViewModel::class)
+    abstract fun chat(v: ChatViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DialogsViewModel::class)
+    abstract fun dialogs(v: DialogsViewModel): ViewModel
 }

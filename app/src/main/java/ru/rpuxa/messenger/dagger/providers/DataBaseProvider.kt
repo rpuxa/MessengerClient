@@ -22,4 +22,7 @@ class DataBaseProvider {
 
     @Provides
     fun usersDao(db: MyDataBase) = db.usersDao
+
+    @Provides
+    fun messages(db: MyDataBase) = db.messagesDao
 }
